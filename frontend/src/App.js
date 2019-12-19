@@ -5,10 +5,13 @@ import GlobalStyles from './styles/global';
 
 import Routes from './routes';
 
+import Header from './components/Header';
+
 function App() {
     return (
         <BrowserRouter>
             <GlobalStyles />
+            <Header />
             <Routes />
         </BrowserRouter>
     );
