@@ -12,7 +12,9 @@ function App() {
         <BrowserRouter>
             <GlobalStyles />
             <Header />
-            <Routes />
+            <div className="body">
+                <Routes />
+            </div>
         </BrowserRouter>
     );
 }

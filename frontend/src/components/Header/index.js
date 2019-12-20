@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { MdShoppingCart } from 'react-icons/md';
 
-import logo from '../../assets/logo.svg';
+import logo from '../../assets/Logo.svg';
 
 import { Container, Logo, Cart } from './styles';
 
@@ -12,7 +12,6 @@ export default function Header() {
             <Link to="/">
                 <Logo>
                     <img src={logo} alt="" />
-                    <strong>MarketBook</strong>
                 </Logo>
             </Link>
 

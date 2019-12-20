@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Container = styled.header`
-    height: 70px;
+    height: 90px;
     padding: 30px;
     display: flex;
     justify-content: space-between;

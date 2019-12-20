@@ -18,7 +18,7 @@ export default createGlobalStyle`
 
     body, input, button {
         font-size: 14px;
-        font-family: Roboto sans-serif;
+        font-family: Roboto, sans-serif;
     }
 
     #root {
@@ -28,5 +28,13 @@ export default createGlobalStyle`
 
     button {
         cursor: pointer;
+    }
+
+    .body{
+        max-width:1020px;
+        margin: 0 auto;
+        padding: 0 20px 50px;
+        margin-top: 20px;
+        font-family: Roboto, sans-serif;
     }
 `;
