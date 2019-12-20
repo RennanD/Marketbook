@@ -1,8 +1,17 @@
 import React from 'react';
-import {View} from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-// import { Container } from './styles';
+import logo from '../../assets/Logo.png';
+
+import {Container, Title, Content} from './styles';
 
 export default function Header() {
-  return <View />;
+  return (
+    <Container>
+      <Content>
+        <Title source={logo} />
+        <Icon name="cart-outline" color="#fefefe" size={35} />
+      </Content>
+    </Container>
+  );
 }
