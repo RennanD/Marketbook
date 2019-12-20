@@ -1,8 +1,8 @@
 <h1 align="center" background="#2193f6">
-    <img src = "./assets/Logo.svg" />
+    <img src = "./assets/Logo.svg" height = "200px" />
 </h1>
 
-<h3 align = "center" >
+<h3 align="center">
     Marketbook, a social network between store and customer.
 </h3>
 
