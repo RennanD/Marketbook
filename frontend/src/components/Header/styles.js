@@ -19,7 +19,7 @@ export const Logo = styled.div`
     align-items: center;
 
     img {
-        height: 36px;
+        height: 50px;
         color: #fefefe;
     }
 

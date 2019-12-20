@@ -12,10 +12,12 @@ export const ProductList = styled.ul`
         flex-direction: column;
         background: #fefefe;
         padding: 20px;
+        border-radius: 4px;
 
         img {
             align-self: center;
             max-width: 250px;
+            margin-bottom: 5px;
         }
 
         > strong {
