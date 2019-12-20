@@ -8,10 +8,8 @@ import {Container, Title, Content} from './styles';
 export default function Header() {
   return (
     <Container>
-      <Content>
-        <Title source={logo} />
-        <Icon name="cart-outline" color="#fefefe" size={35} />
-      </Content>
+      <Title source={logo} />
+      <Icon name="cart-outline" color="#fefefe" size={35} />
     </Container>
   );
 }

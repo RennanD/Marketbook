@@ -1,15 +1,16 @@
 import styled from 'styled-components/native';
 
 export const Container = styled.View`
-  height: 200px;
+  height: 100px;
   background: #2193f6;
-  z-index: 1;
-
-  text-align: center;
+  align-items: baseline;
+  padding: 20px;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 export const Content = styled.View`
-  flex-direction: row;
+  flex: 1;
   align-items: baseline;
   padding: 30px;
   justify-content: space-between;
