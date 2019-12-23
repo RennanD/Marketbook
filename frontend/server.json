@@ -1,0 +1,66 @@
+{
+    "stock": [
+        {
+            "id": 1,
+            "amount": 3
+        },
+        {
+            "id": 2,
+            "amount": 5
+        },
+        {
+            "id": 3,
+            "amount": 2
+        },
+        {
+            "id": 4,
+            "amount": 1
+        },
+        {
+            "id": 5,
+            "amount": 5
+        },
+        {
+            "id": 6,
+            "amount": 10
+        }
+    ],
+    "products": [
+        {
+            "id": 1,
+            "title": "Redmi Note 8",
+            "price": 1399.9,
+            "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcRqW2obnZH4QMDIqSLVeNoHX0d7l_8A_CD5eK8DOjZPEyegTEtafMM&usqp=CAc"
+        },
+        {
+            "id": 2,
+            "title": "iPhone 8",
+            "price": 2287.9,
+            "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS9571lGdFlyuqqHnRznah0ZGWJ1CSD0a2QS5fvP3z2YNnWYuwxouM&usqp=CAc"
+        },
+        {
+            "id": 3,
+            "title": "Samsung A30",
+            "price": 2999.9,
+            "image": "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcQtvCpIDjehCVkqKNNxdf_iuOR9Km7HdAEHzkE17Qh-UQoWjkiK5A&usqp=CAc"
+        },
+        {
+            "id": 5,
+            "title": "Redmi note 7",
+            "price": 1099.9,
+            "image": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTSa0o_b9Kp5TyJQGydo9dRQrJBXBXkeE0bRSNqA0TiVFiCvt7el9M&usqp=CAc"
+        },
+        {
+            "id": 6,
+            "title": "iPhone 11",
+            "price": 4479.9,
+            "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQPcI4VMZgSaA9FKTsuIlIJ3bBIOYQ4qaMQrLzoqHQNtOZYCd3nAZ0&usqp=CAc"
+        },
+        {
+            "id": 4,
+            "title": "Samsung Galaxy S10",
+            "price": 2999.9,
+            "image": "https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcQoFx_Rqo4eMXF3RqyrW2mcbBkXnspGTDTRjpAw8mgNehkoOQSbCg&usqp=CAc"
+        }
+    ]
+}
