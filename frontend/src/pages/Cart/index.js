@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
+import * as CartActions from '../../store/modules/cart/actions';
 
 import {
     MdRemoveCircleOutline,
@@ -12,12 +13,9 @@ import { ProductTable, Container, Total } from './styles';
 
 class Cart extends Component {
     hanleRemoveToCart = product => {
-        const { dispatch } = this.props;
+        const { removeFromCart } = this.props;
 
-        dispatch({
-            type: 'REMOVE_FROM_CART',
-            product,
-        });
+        removeFromCart(product);
     };
 
     render() {
@@ -101,5 +99,7 @@ class Cart extends Component {
 const mapStateToProps = state => ({
     cart: state.cart,
 });
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(CartActions, dispatch);
 
-export default connect(mapStateToProps)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
