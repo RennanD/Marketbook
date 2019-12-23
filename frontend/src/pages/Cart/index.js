@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+
+import { formatPrice } from '../../utils/format';
+
 import * as CartActions from '../../store/modules/cart/actions';
 
 import {
@@ -88,7 +91,7 @@ class Cart extends Component {
                                     </div>
                                 </td>
                                 <td>
-                                    <strong>R$ 2800,00</strong>
+                                    <strong>{product.subtotal}</strong>
                                 </td>
                                 <td>
                                     <button
@@ -108,7 +111,7 @@ class Cart extends Component {
                     <button>Finalizar pedido</button>
                     <Total>
                         <span>TOTAL</span>
-                        <strong>1920,80</strong>
+                        <strong>{this.props.total}</strong>
                     </Total>
                 </footer>
             </Container>
@@ -117,7 +120,15 @@ class Cart extends Component {
 }
 
 const mapStateToProps = state => ({
-    cart: state.cart,
+    cart: state.cart.map(product => ({
+        ...product,
+        subtotal: formatPrice(product.price * product.amount),
+    })),
+    total: formatPrice(
+        state.cart.reduce((total, product) => {
+            return total + product.price * product.amount;
+        }, 0)
+    ),
 });
 const mapDispatchToProps = dispatch =>
     bindActionCreators(CartActions, dispatch);
