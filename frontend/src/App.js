@@ -4,6 +4,8 @@ import { Provider } from 'react-redux';
 
 import GlobalStyles from './styles/global';
 
+import './config/reactotronConfig';
+
 import store from './store';
 
 import Routes from './routes';
