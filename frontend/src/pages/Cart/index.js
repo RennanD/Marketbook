@@ -11,6 +11,15 @@ import {
 import { ProductTable, Container, Total } from './styles';
 
 class Cart extends Component {
+    hanleRemoveToCart = product => {
+        const { dispatch } = this.props;
+
+        dispatch({
+            type: 'REMOVE_FROM_CART',
+            product,
+        });
+    };
+
     render() {
         const { cart } = this.props;
 
@@ -64,7 +73,12 @@ class Cart extends Component {
                                     <strong>R$ 2800,00</strong>
                                 </td>
                                 <td>
-                                    <button type="button">
+                                    <button
+                                        type="button"
+                                        onClick={() =>
+                                            this.hanleRemoveToCart(product.id)
+                                        }
+                                    >
                                         <MdDelete size={20} color="#2193f6" />
                                     </button>
                                 </td>
