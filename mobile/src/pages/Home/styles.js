@@ -16,6 +16,7 @@ export const Card = styled.View`
   background: #fefefe;
   padding: 20px;
   border-radius: 7px;
+  margin-bottom: 5px;
 `;
 
 export const Banner = styled.Image`
