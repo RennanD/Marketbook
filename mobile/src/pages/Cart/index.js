@@ -1,115 +1,103 @@
 import React from 'react';
+import { connect } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MdIcon from 'react-native-vector-icons/MaterialIcons';
 
+import { formartPrice } from '../../utils/format';
+
 import Header from '../../components/Header';
 
 import {
-  Container,
-  Content,
-  AmountView,
-  Banner,
-  Info,
-  CartList,
-  Footer,
-  Item,
-  Price,
-  Subtotal,
-  Title,
-  TotalPrice,
-  TotalText,
-  TotatView,
-  Product,
-  Description,
-  Input,
-  FinishButton,
-  TextButton,
+    Container,
+    Content,
+    AmountView,
+    Banner,
+    Info,
+    CartList,
+    Footer,
+    Item,
+    Price,
+    Subtotal,
+    Title,
+    TotalPrice,
+    TotalText,
+    TotatView,
+    Product,
+    Description,
+    Input,
+    FinishButton,
+    TextButton,
 } from './styles';
 
-export default function Cart({navigation}) {
-  const data = [
-    {
-      id: 1,
-      uri:
-        'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS9571lGdFlyuqqHnRznah0ZGWJ1CSD0a2QS5fvP3z2YNnWYuwxouM&usqp=CAc',
-    },
-    {
-      id: 2,
-      uri:
-        'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS9571lGdFlyuqqHnRznah0ZGWJ1CSD0a2QS5fvP3z2YNnWYuwxouM&usqp=CAc',
-    },
-    {
-      id: 3,
-      uri:
-        'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS9571lGdFlyuqqHnRznah0ZGWJ1CSD0a2QS5fvP3z2YNnWYuwxouM&usqp=CAc',
-    },
-    {
-      id: 4,
-      uri:
-        'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS9571lGdFlyuqqHnRznah0ZGWJ1CSD0a2QS5fvP3z2YNnWYuwxouM&usqp=CAc',
-    },
-    {
-      id: 5,
-      uri:
-        'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS9571lGdFlyuqqHnRznah0ZGWJ1CSD0a2QS5fvP3z2YNnWYuwxouM&usqp=CAc',
-    },
-    {
-      id: 6,
-      uri:
-        'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS9571lGdFlyuqqHnRznah0ZGWJ1CSD0a2QS5fvP3z2YNnWYuwxouM&usqp=CAc',
-    },
-  ];
-
-  return (
-    <>
-      <Header navigate={navigation.navigate} />
-      <Container>
-        <Content>
-          <CartList
-            data={data}
-            keyExtractor={item => String(item.id)}
-            renderItem={({item}) => (
-              <Item>
-                <Info>
-                  <Product>
-                    <Banner source={{uri: item.uri}} />
-                    <Description>
-                      <Title>iPhone 8</Title>
-                      <Price>1400,90</Price>
-                    </Description>
-                  </Product>
-                  <Icon name="cart-remove" size={28} color="#2193f6" />
-                </Info>
-                <Footer>
-                  <AmountView>
-                    <MdIcon
-                      name="remove-circle-outline"
-                      size={26}
-                      color="#2193f6"
+function Cart({ navigation, cart, total }) {
+    return (
+        <>
+            <Header navigate={navigation.navigate} />
+            <Container>
+                <Content>
+                    <CartList
+                        data={cart}
+                        keyExtractor={product => String(product.id)}
+                        renderItem={({ item }) => (
+                            <Item>
+                                <Info>
+                                    <Product>
+                                        <Banner source={{ uri: item.image }} />
+                                        <Description>
+                                            <Title>{item.title}</Title>
+                                            <Price>{item.priceFormatted}</Price>
+                                        </Description>
+                                    </Product>
+                                    <Icon
+                                        name="cart-remove"
+                                        size={28}
+                                        color="#2193f6"
+                                    />
+                                </Info>
+                                <Footer>
+                                    <AmountView>
+                                        <MdIcon
+                                            name="remove-circle-outline"
+                                            size={26}
+                                            color="#2193f6"
+                                        />
+                                        <Input value={String(item.amount)} />
+                                        <Icon
+                                            name="plus-circle-outline"
+                                            size={26}
+                                            color="#2193f6"
+                                        />
+                                    </AmountView>
+                                    <Subtotal>{item.subtotal}</Subtotal>
+                                </Footer>
+                            </Item>
+                        )}
                     />
-                    <Input value="2" />
-                    <Icon
-                      name="plus-circle-outline"
-                      size={26}
-                      color="#2193f6"
-                    />
-                  </AmountView>
-                  <Subtotal>R$ 2801,80</Subtotal>
-                </Footer>
-              </Item>
-            )}
-          />
-          <TotatView>
-            <TotalText>TOTAL</TotalText>
-            <TotalPrice>R$ 2801,80</TotalPrice>
-          </TotatView>
+                    <TotatView>
+                        <TotalText>TOTAL</TotalText>
+                        <TotalPrice>{total}</TotalPrice>
+                    </TotatView>
 
-          <FinishButton>
-            <TextButton>Finalizar pedido</TextButton>
-          </FinishButton>
-        </Content>
-      </Container>
-    </>
-  );
+                    <FinishButton>
+                        <TextButton>Finalizar pedido</TextButton>
+                    </FinishButton>
+                </Content>
+            </Container>
+        </>
+    );
 }
+
+const mapStateToProps = state => ({
+    cart: state.cart.map(product => ({
+        ...product,
+        subtotal: formartPrice(product.price * product.amount),
+    })),
+    total: formartPrice(
+        state.cart.reduce((total, product) => {
+            return total + product.price * product.amount;
+        }, 0)
+    ),
+});
+
+export default connect(mapStateToProps, null)(Cart);
