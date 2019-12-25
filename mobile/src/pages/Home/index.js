@@ -1,5 +1,9 @@
-import React from 'react';
+import React, {Component} from 'react';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import api from '../../services/api';
+
+import {formartPrice} from '../../utils/format';
 
 import Header from '../../components/Header';
 
@@ -16,29 +20,51 @@ import {
   Title,
 } from './styles';
 
-export default function Home({navigation}) {
-  return (
-    <>
-      <Header navigate={navigation.navigate} />
-      <Container>
-        <Card>
-          <Banner
-            source={{
-              uri:
-                'https://encrypted-tbn0.gstatic.com/shopping?q=tbn:ANd9GcS9571lGdFlyuqqHnRznah0ZGWJ1CSD0a2QS5fvP3z2YNnWYuwxouM&usqp=CAc',
-            }}
+class Home extends Component {
+  state = {
+    products: [],
+  };
+
+  async componentDidMount() {
+    const response = await api.get('/products');
+
+    const data = response.data.map(product => ({
+      ...product,
+      priceFormatted: formartPrice(product.price),
+    }));
+    // eslint-disable-next-line react/no-did-mount-set-state
+    this.setState({products: data});
+  }
+
+  render() {
+    const {navigation} = this.props;
+    const {products} = this.state;
+    return (
+      <>
+        <Header navigate={navigation.navigate} />
+        <Container>
+          <ProductList
+            data={products}
+            keyExtractor={product => String(product.id)}
+            renderItem={({item}) => (
+              <Card>
+                <Banner source={{uri: item.image}} />
+                <Title>{item.title}</Title>
+                <Price>{item.priceFormatted}</Price>
+                <AddButton>
+                  <AmountView>
+                    <Icon name="cart-plus" size={16} color="#fefefe" />
+                    <AmountText>1</AmountText>
+                  </AmountView>
+                  <ButtonText>Adicionar ao carrinho</ButtonText>
+                </AddButton>
+              </Card>
+            )}
           />
-          <Title>iPhone 8</Title>
-          <Price>2.4000,90</Price>
-          <AddButton>
-            <AmountView>
-              <Icon name="cart-plus" size={16} color="#fefefe" />
-              <AmountText>1</AmountText>
-            </AmountView>
-            <ButtonText>Adicionar ao carrinho</ButtonText>
-          </AddButton>
-        </Card>
-      </Container>
-    </>
-  );
+        </Container>
+      </>
+    );
+  }
 }
+
+export default Home;

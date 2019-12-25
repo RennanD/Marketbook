@@ -12,6 +12,7 @@ export const Content = styled.View`
   background: #fefefe;
   padding: 20px;
   border-radius: 7px;
+  max-height: 650px;
 `;
 
 export const CartList = styled.FlatList.attrs({
