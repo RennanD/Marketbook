@@ -1,8 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MdIcon from 'react-native-vector-icons/MaterialIcons';
+
+import * as CartActions from '../../store/modules/cart/actions';
 
 import { formartPrice } from '../../utils/format';
 
@@ -28,9 +31,28 @@ import {
     Input,
     FinishButton,
     TextButton,
+    ActionButton,
 } from './styles';
 
-function Cart({ navigation, cart, total }) {
+function Cart({
+    navigation,
+    cart,
+    total,
+    updateAmountRequest,
+    removeFromCart,
+}) {
+    function increment(product) {
+        const { id, amount } = product;
+
+        updateAmountRequest(id, amount + 1);
+    }
+
+    function decrement(product) {
+        const { id, amount } = product;
+
+        updateAmountRequest(id, amount - 1);
+    }
+
     return (
         <>
             <Header navigate={navigation.navigate} />
@@ -49,25 +71,40 @@ function Cart({ navigation, cart, total }) {
                                             <Price>{item.priceFormatted}</Price>
                                         </Description>
                                     </Product>
-                                    <Icon
-                                        name="cart-remove"
-                                        size={28}
-                                        color="#2193f6"
-                                    />
+                                    <ActionButton
+                                        onPress={() => removeFromCart(item.id)}
+                                    >
+                                        <Icon
+                                            name="cart-remove"
+                                            size={28}
+                                            color="#2193f6"
+                                        />
+                                    </ActionButton>
                                 </Info>
                                 <Footer>
                                     <AmountView>
-                                        <MdIcon
-                                            name="remove-circle-outline"
-                                            size={26}
-                                            color="#2193f6"
+                                        <ActionButton
+                                            onPress={() => decrement(item)}
+                                        >
+                                            <MdIcon
+                                                name="remove-circle-outline"
+                                                size={26}
+                                                color="#2193f6"
+                                            />
+                                        </ActionButton>
+                                        <Input
+                                            value={String(item.amount)}
+                                            editable={false}
                                         />
-                                        <Input value={String(item.amount)} />
-                                        <Icon
-                                            name="plus-circle-outline"
-                                            size={26}
-                                            color="#2193f6"
-                                        />
+                                        <ActionButton
+                                            onPress={() => increment(item)}
+                                        >
+                                            <Icon
+                                                name="plus-circle-outline"
+                                                size={26}
+                                                color="#2193f6"
+                                            />
+                                        </ActionButton>
                                     </AmountView>
                                     <Subtotal>{item.subtotal}</Subtotal>
                                 </Footer>
@@ -99,5 +136,7 @@ const mapStateToProps = state => ({
         }, 0)
     ),
 });
+const mapDispatchToProps = dispatch =>
+    bindActionCreators(CartActions, dispatch);
 
-export default connect(mapStateToProps, null)(Cart);
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

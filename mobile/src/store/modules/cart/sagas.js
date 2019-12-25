@@ -1,6 +1,10 @@
 import { all, call, select, takeLatest, put } from 'redux-saga/effects';
 
-import { addToCartSuccess } from './actions';
+import {
+    addToCartSuccess,
+    updateAmountSuccess,
+    updateAmountRequest,
+} from './actions';
 
 import { formartPrice } from '../../../utils/format';
 import api from '../../../services/api';
@@ -20,4 +24,15 @@ function* addToCart({ id }) {
     yield put(addToCartSuccess(data));
 }
 
-export default all([takeLatest('@cart/ADD_REQUEST', addToCart)]);
+function* updateAmount({ id, amount }) {
+    if (amount <= 0) return;
+
+    console.tron.log(id, amount);
+
+    yield put(updateAmountSuccess(id, amount));
+}
+
+export default all([
+    takeLatest('@cart/ADD_REQUEST', addToCart),
+    takeLatest('@cart/UPDATE_REQUEST', updateAmount),
+]);
