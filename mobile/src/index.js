@@ -1,14 +1,17 @@
 import React from 'react';
-import {StatusBar} from 'react-native';
+import { StatusBar } from 'react-native';
+
+import { Provider } from 'react-redux';
+
+import store from './store';
 
 import Routes from './routes';
-import Header from './components/Header';
 
 export default function App() {
-  return (
-    <>
-      <StatusBar backgroundColor="#2193f6" barStyle="light-content" />
-      <Routes />
-    </>
-  );
+    return (
+        <Provider store={store}>
+            <StatusBar backgroundColor="#2193f6" barStyle="light-content" />
+            <Routes />
+        </Provider>
+    );
 }
