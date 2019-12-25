@@ -57,4 +57,6 @@ To start application, run:
 $ yarn start
 ```
 
-<img src ="./assets/MarketBook-web.gif" width="600px">
+<h1 align="center">
+<img src ="./assets/MarketBook-web.gif" width="800px">
+</h1>
