@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Snackbar from 'react-native-snackbar';
 
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -37,7 +38,6 @@ class Home extends Component {
             ...product,
             priceFormatted: formartPrice(product.price),
         }));
-        // eslint-disable-next-line react/no-did-mount-set-state
         this.setState({ products: data });
     }
 
@@ -49,6 +49,7 @@ class Home extends Component {
 
     render() {
         const { navigation } = this.props;
+        const { amount } = this.props;
         const { products } = this.state;
         return (
             <>
@@ -73,7 +74,9 @@ class Home extends Component {
                                             size={16}
                                             color="#fefefe"
                                         />
-                                        <AmountText>1</AmountText>
+                                        <AmountText>
+                                            {amount[item.id] || 0}{' '}
+                                        </AmountText>
                                     </AmountView>
                                     <ButtonText>
                                         Adicionar ao carrinho
@@ -88,7 +91,14 @@ class Home extends Component {
     }
 }
 
+const mapStateToProps = state => ({
+    amount: state.cart.reduce((amount, product) => {
+        amount[product.id] = product.amount;
+        return amount;
+    }, {}),
+});
+
 const mapDispatchToProps = dispatch =>
     bindActionCreators(CartActions, dispatch);
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

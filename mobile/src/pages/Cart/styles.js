@@ -8,11 +8,19 @@ export const Container = styled.View`
     flex: 1;
 `;
 
+export const EmptyCart = styled.Text`
+    font-size: 22px;
+    align-self: center;
+    text-align: center;
+    color: #999;
+`;
+
 export const Content = styled.View`
     background: #fefefe;
     padding: 20px;
     border-radius: 7px;
     max-height: 650px;
+    justify-content: center;
 `;
 
 export const CartList = styled.FlatList.attrs({

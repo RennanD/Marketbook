@@ -5541,6 +5541,11 @@ react-native-safe-area-view@^0.14.1:
   dependencies:
     debounce "^1.2.0"
 
+react-native-snackbar@^2.0.4:
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-snackbar/-/react-native-snackbar-2.0.4.tgz#cc9587600b6c67267b5a96eb74e693d2e3eee054"
+  integrity sha512-q0NhXYV3uBebN4z9MenR8SIycFGM7QN8NWgwcbJn1zuEiRp49jaJRR/KX7ucS385BvqzBdUu+QqF7SrFN7HiRA==
+
 react-native-vector-icons@^6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-6.6.0.tgz#66cf004918eb05d90778d64bd42077c1800d481b"

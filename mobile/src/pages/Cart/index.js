@@ -32,6 +32,7 @@ import {
     FinishButton,
     TextButton,
     ActionButton,
+    EmptyCart,
 } from './styles';
 
 function Cart({
@@ -40,6 +41,7 @@ function Cart({
     total,
     updateAmountRequest,
     removeFromCart,
+    cartSize,
 }) {
     function increment(product) {
         const { id, amount } = product;
@@ -52,6 +54,20 @@ function Cart({
 
         updateAmountRequest(id, amount - 1);
     }
+
+    if (cartSize <= 0)
+        return (
+            <>
+                <Header navigate={navigation.navigate} />
+                <Container>
+                    <Content>
+                        <EmptyCart>
+                            Adicione produtos ao carrinho para continuar.
+                        </EmptyCart>
+                    </Content>
+                </Container>
+            </>
+        );
 
     return (
         <>
@@ -125,16 +141,17 @@ function Cart({
     );
 }
 
-const mapStateToProps = state => ({
-    cart: state.cart.map(product => ({
+const mapStateToProps = ({ cart }) => ({
+    cart: cart.map(product => ({
         ...product,
         subtotal: formartPrice(product.price * product.amount),
     })),
     total: formartPrice(
-        state.cart.reduce((total, product) => {
+        cart.reduce((total, product) => {
             return total + product.price * product.amount;
         }, 0)
     ),
+    cartSize: cart.length,
 });
 const mapDispatchToProps = dispatch =>
     bindActionCreators(CartActions, dispatch);

@@ -10,9 +10,18 @@ function* addToCart({ id }) {
         state.cart.find(p => p.id === id)
     );
 
+    const stock = yield call(api.get, `/stock/${id}`);
+
+    const stockAmount = stock.data.amount;
+
     const currentAmount = productExists ? productExists.amount : 0;
 
     const amount = currentAmount + 1;
+
+    if (amount > stockAmount) {
+        alert('Quantide em estoque insuficiente.');
+        return;
+    }
 
     if (productExists) {
         yield put(updateAmountSuccess(id, amount));
@@ -31,9 +40,16 @@ function* addToCart({ id }) {
 function* updateAmount({ id, amount }) {
     if (amount <= 0) return;
 
-    console.tron.log(id, amount);
+    const stock = yield call(api.get, `/stock/${id}`);
 
-    yield put(updateAmountSuccess(id, amount));
+    const stockAmount = stock.data.amount;
+
+    if (amount > stockAmount) {
+        alert('Quantide em estoque insuficiente.');
+        return;
+    } else {
+        yield put(updateAmountSuccess(id, amount));
+    }
 }
 
 export default all([
