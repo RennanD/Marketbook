@@ -1,6 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { bindActionCreators } from 'redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import MdIcon from 'react-native-vector-icons/MaterialIcons';
@@ -35,24 +34,36 @@ import {
     EmptyCart,
 } from './styles';
 
-function Cart({
-    navigation,
-    cart,
-    total,
-    updateAmountRequest,
-    removeFromCart,
-    cartSize,
-}) {
+export default function Cart({ navigation }) {
+    const cart = useSelector(state =>
+        state.cart.map(product => ({
+            ...product,
+            subtotal: formartPrice(product.price * product.amount),
+        }))
+    );
+
+    const total = useSelector(state =>
+        formartPrice(
+            state.cart.reduce((total, product) => {
+                return total + product.price * product.amount;
+            }, 0)
+        )
+    );
+
+    const cartSize = useSelector(state => state.cart.length);
+
+    const dispatch = useDispatch();
+
     function increment(product) {
         const { id, amount } = product;
 
-        updateAmountRequest(id, amount + 1);
+        dispatch(CartActions.updateAmountRequest(id, amount + 1));
     }
 
     function decrement(product) {
         const { id, amount } = product;
 
-        updateAmountRequest(id, amount - 1);
+        dispatch(CartActions.updateAmountRequest(id, amount - 1));
     }
 
     if (cartSize <= 0)
@@ -88,7 +99,13 @@ function Cart({
                                         </Description>
                                     </Product>
                                     <ActionButton
-                                        onPress={() => removeFromCart(item.id)}
+                                        onPress={() =>
+                                            dispatch(
+                                                CartActions.removeFromCart(
+                                                    item.id
+                                                )
+                                            )
+                                        }
                                     >
                                         <Icon
                                             name="cart-remove"
@@ -140,20 +157,3 @@ function Cart({
         </>
     );
 }
-
-const mapStateToProps = ({ cart }) => ({
-    cart: cart.map(product => ({
-        ...product,
-        subtotal: formartPrice(product.price * product.amount),
-    })),
-    total: formartPrice(
-        cart.reduce((total, product) => {
-            return total + product.price * product.amount;
-        }, 0)
-    ),
-    cartSize: cart.length,
-});
-const mapDispatchToProps = dispatch =>
-    bindActionCreators(CartActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);

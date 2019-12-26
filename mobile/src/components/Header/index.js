@@ -1,13 +1,15 @@
 import React from 'react';
 
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 import logo from '../../assets/MarketBook/Logo.png';
 import { Container, Logo, NavigateButton, Badge, BadgeNumber } from './styles';
 
-function Header({ navigate, cartSize }) {
+export default function Header({ navigate }) {
+    const cartSize = useSelector(state => state.cart.length);
+
     return (
         <Container>
             <NavigateButton onPress={() => navigate('Home')}>
@@ -24,9 +26,3 @@ function Header({ navigate, cartSize }) {
         </Container>
     );
 }
-
-const mapStateToProps = state => ({
-    cartSize: state.cart.length,
-});
-
-export default connect(mapStateToProps, null)(Header);
