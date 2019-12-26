@@ -73,7 +73,7 @@ $ yarn start
 
 # ❗️ Requisites
 
-- [React Navite CLI](https://github.com/react-native-community/cli)
+- [React Native CLI](https://github.com/react-native-community/cli)
 
 ## ⚡️ Start
 
