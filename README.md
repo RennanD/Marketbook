@@ -117,5 +117,5 @@ $ react-native run-ios
 ```
 
 <h1 align="center">
-<img src ="./assets/MArketbook-Mobile.gif" height="800px">
+<img src ="./assets/MArketbook-Mobile.gif" height="600px">
 </h1>
