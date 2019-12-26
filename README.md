@@ -60,3 +60,62 @@ $ yarn start
 <h1 align="center">
 <img src ="./assets/MarketBook-web.gif" width="800px">
 </h1>
+
+# 📱 Mobile Application
+
+<h1 align="center">
+    <img src ="./assets/smartphone.svg" width="200px" />
+</h1>
+
+<h3 align="center">
+    Add, remove and edit as many products as you want
+</h3>
+
+# ❗️ Requisites
+
+- [React Navite CLI](https://github.com/react-native-community/cli)
+
+## ⚡️ Start
+
+if you installed json server globally, run:
+
+```bash
+$ cd frontend
+$ json-server api.json -p 3333 -w
+```
+
+if you installed json server locally in the project, run:
+
+```bash
+$ cd frontend
+$ yarn json-server api.json -p 3333 -w
+```
+
+To start application, run:
+
+```bash
+$ cd frontend
+$ yarn json-server api.json -p 3333 -w
+```
+
+### 👾 Android
+
+You need [Android's SDK](https://developer.android.com/studio)
+
+```bash
+$ cd mobile
+$ react-native run-android
+```
+
+## 🍎 IOS
+
+You need [XCode](https://developer.apple.com/xcode/)
+
+```bash
+$ cd mobile
+$ react-native run-ios
+```
+
+<h1 align="center">
+<img src ="./assets/MarketBook-Mobile.gif" height="800px">
+</h1>
