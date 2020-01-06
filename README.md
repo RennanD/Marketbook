@@ -94,14 +94,6 @@ $ yarn install
 $ yarn json-server api.json -p 3333 -w
 ```
 
-To start application, run:
-
-```bash
-$ cd frontend
-$ yarn install
-$ yarn json-server api.json -p 3333 -w
-```
-
 ### 👾 Android
 
 You need [Android's SDK](https://developer.android.com/studio)
