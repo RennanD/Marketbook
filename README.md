@@ -41,6 +41,7 @@ if you installed json server globally, run:
 
 ```bash
 $ cd frontend
+$ yarn install
 $ json-server api.json -p 3333 -w
 ```
 
@@ -48,6 +49,7 @@ if you installed json server locally in the project, run:
 
 ```bash
 $ cd frontend
+$ yarn install
 $ yarn json-server api.json -p 3333 -w
 ```
 
@@ -88,6 +90,7 @@ if you installed json server locally in the project, run:
 
 ```bash
 $ cd frontend
+$ yarn install
 $ yarn json-server api.json -p 3333 -w
 ```
 
@@ -95,6 +98,7 @@ To start application, run:
 
 ```bash
 $ cd frontend
+$ yarn install
 $ yarn json-server api.json -p 3333 -w
 ```
 
@@ -104,6 +108,7 @@ You need [Android's SDK](https://developer.android.com/studio)
 
 ```bash
 $ cd mobile
+$ yarn install
 $ react-native run-android
 ```
 
@@ -113,6 +118,7 @@ You need [XCode](https://developer.apple.com/xcode/)
 
 ```bash
 $ cd mobile
+$ yarn install
 $ react-native run-ios
 ```
 
